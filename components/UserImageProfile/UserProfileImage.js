@@ -16,6 +16,6 @@ const UserProfileImage = props => {
 
 UserProfileImage.propTypes = {
   profileImage: PropTypes.any.isRequired,
-  imageDimensions: PropTypes.number.isRequired,
+  imageDimensions: PropTypes.any.isRequired,
 };
 export default UserProfileImage;
