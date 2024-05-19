@@ -60,7 +60,7 @@ const App = () => {
       profileImage: require('./assets/images/default_profile.png'),
     },
     {
-      firstName: 'Joseph',
+      firstName: 'Busra',
       id: 1,
       profileImage: require('./assets/images/default_profile.png'),
     },
