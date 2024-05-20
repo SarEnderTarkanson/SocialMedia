@@ -65,10 +65,63 @@ const App = () => {
       profileImage: require('./assets/images/default_profile.png'),
     },
   ];
+  const userPosts = [
+    {
+      firstName: 'Endo',
+      lastName: 'Tarkan',
+      location: 'Steinkjer',
+      likes: 1201,
+      comments: 24,
+      bookmarks: 55,
+      id: 1,
+    },
+    {
+      firstName: 'Beyza',
+      lastName: 'Tarkan',
+      location: 'Steinkjer',
+      likes: 1301,
+      comments: 27,
+      bookmarks: 58,
+      id: 2,
+    },
+    {
+      firstName: 'Makbule',
+      lastName: 'Tarkan',
+      location: 'Steinkjer',
+      likes: 1401,
+      comments: 28,
+      bookmarks: 59,
+      id: 3,
+    },
+    {
+      firstName: 'Alpy',
+      lastName: 'Tarkan',
+      location: 'Steinkjer',
+      likes: 1200,
+      comments: 20,
+      bookmarks: 50,
+      id: 4,
+    },
+    {
+      firstName: 'Beyza',
+      lastName: 'Tarkan',
+      location: 'Steinkjer',
+      likes: 1255,
+      comments: 34,
+      bookmarks: 66,
+      id: 5,
+    },
+  ];
+
   const userStoriesPageSize = 4;
   const [userStoriesCurrentPage, setUserStoriesCurrentPage] = useState(1);
   const [userStoriesRenderedData, setUserStoriesRenderedData] = useState([]);
   const [isLoadingUserStories, setIsLoadingUserStories] = useState(false);
+
+  const userPostsPageSize = 4;
+  const [userPostsCurrentPage, setUserPostsCurrentPage] = useState(1);
+  const [userPostsRenderedData, setUserPostsRenderedData] = useState([]);
+  const [isLoadingUserPosts, setIsLoadingUserPosts] = useState(false);
 
   const pagination = (database, currentPage, pageSize) => {
     const startIndex = (currentPage - 1) * pageSize;
