@@ -5,7 +5,8 @@ import style from './style';
 
 const UserProfileImage = props => {
   return (
-    <View style={[style.userImageContainer, {borderRadius: props.imageDimensions}]}>
+    <View
+      style={[style.userImageContainer, {borderRadius: props.imageDimensions}]}>
       <Image
         source={props.profileImage}
         style={{width: props.imageDimensions, height: props.imageDimensions}}
