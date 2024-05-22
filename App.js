@@ -166,7 +166,7 @@ const App = () => {
                 <TouchableOpacity style={globalStyle.messageIcon}>
                   <FontAwesomeIcon
                     icon={faEnvelope}
-                    size="20"
+                    size={20}
                     color="#898DEA"
                   />
                   <View style={globalStyle.messageNumberContainer}>
