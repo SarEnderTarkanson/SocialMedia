@@ -14,6 +14,7 @@ import globalStyle from './assets/styles/globalStyle';
 import UserStory from './components/UserStory/UserStory';
 import UserPost from './components/UserPost/UserPost';
 import {scaleFontSize} from './assets/styles/scaling';
+import {NavigationContainer} from '@react-navigation/native';
 
 const App = () => {
   const userStories = [
@@ -158,96 +159,98 @@ const App = () => {
   }, []);
 
   return (
-    <SafeAreaView>
-      <StatusBar backgroundColor={'red'} barStyle={'light-content'} />
-      <View>
-        <FlatList
-          ListHeaderComponent={
-            <>
-              <View style={globalStyle.header}>
-                <Title title={"Let's Explore"} />
-                <TouchableOpacity style={globalStyle.messageIcon}>
-                  <FontAwesomeIcon
-                    icon={faEnvelope}
-                    size={scaleFontSize(20)}
-                    color="#898DEA"
-                  />
-                  <View style={globalStyle.messageNumberContainer}>
-                    <Text style={globalStyle.messageNumber}>2</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <View style={globalStyle.userStoryContainer}>
-                <FlatList
-                  onEndReachedThreshold={0.5}
-                  onEndReached={() => {
-                    if (isLoadingUserStories) {
-                      return;
-                    }
-                    setIsLoadingUserStories(true);
-                    const contentToAppend = pagination(
-                      userStories,
-                      userStoriesCurrentPage + 1,
-                      userStoriesPageSize,
-                    );
-                    if (contentToAppend.length > 0) {
-                      setUserStoriesCurrentPage(userStoriesCurrentPage + 1);
-                      setUserStoriesRenderedData(prev => [
-                        ...prev,
-                        ...contentToAppend,
-                      ]);
-                    }
-                    setIsLoadingUserStories(false);
-                  }}
-                  showsHorizontalScrollIndicator={false}
-                  horizontal={true}
-                  data={userStoriesRenderedData}
-                  renderItem={({item}) => (
-                    <UserStory
-                      key={'userStory' + item.id}
-                      firstName={item.firstName}
-                      profileImage={item.profileImage}
+    <NavigationContainer>
+      <SafeAreaView>
+        <StatusBar backgroundColor={'green'} barStyle={'light-content'} />
+        <View>
+          <FlatList
+            ListHeaderComponent={
+              <>
+                <View style={globalStyle.header}>
+                  <Title title={"Let's Explore"} />
+                  <TouchableOpacity style={globalStyle.messageIcon}>
+                    <FontAwesomeIcon
+                      icon={faEnvelope}
+                      size={scaleFontSize(20)}
+                      color="#898DEA"
                     />
-                  )}
+                    <View style={globalStyle.messageNumberContainer}>
+                      <Text style={globalStyle.messageNumber}>2</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+                <View style={globalStyle.userStoryContainer}>
+                  <FlatList
+                    onEndReachedThreshold={0.5}
+                    onEndReached={() => {
+                      if (isLoadingUserStories) {
+                        return;
+                      }
+                      setIsLoadingUserStories(true);
+                      const contentToAppend = pagination(
+                        userStories,
+                        userStoriesCurrentPage + 1,
+                        userStoriesPageSize,
+                      );
+                      if (contentToAppend.length > 0) {
+                        setUserStoriesCurrentPage(userStoriesCurrentPage + 1);
+                        setUserStoriesRenderedData(prev => [
+                          ...prev,
+                          ...contentToAppend,
+                        ]);
+                      }
+                      setIsLoadingUserStories(false);
+                    }}
+                    showsHorizontalScrollIndicator={false}
+                    horizontal={true}
+                    data={userStoriesRenderedData}
+                    renderItem={({item}) => (
+                      <UserStory
+                        key={'userStory' + item.id}
+                        firstName={item.firstName}
+                        profileImage={item.profileImage}
+                      />
+                    )}
+                  />
+                </View>
+              </>
+            }
+            onEndReachedThreshold={0.5}
+            onEndReached={() => {
+              if (isLoadingUserPosts) {
+                return;
+              }
+              setIsLoadingUserPosts(true);
+              const contentToAppend = pagination(
+                userPosts,
+                userPostsCurrentPage + 1,
+                userPostsPageSize,
+              );
+              if (contentToAppend.length > 0) {
+                setUserPostsCurrentPage(userPostsCurrentPage + 1);
+                setUserPostsRenderedData(prev => [...prev, ...contentToAppend]);
+              }
+            }}
+            data={userPostsRenderedData}
+            showsVerticalScrollIndicator={false}
+            renderItem={({item}) => (
+              <View style={globalStyle.userPostContainer}>
+                <UserPost
+                  firstName={item.firstName}
+                  lastName={item.lastName}
+                  image={item.image}
+                  likes={item.likes}
+                  comments={item.comments}
+                  bookmarks={item.bookmarks}
+                  profileImage={item.profileImage}
+                  location={item.location}
                 />
               </View>
-            </>
-          }
-          onEndReachedThreshold={0.5}
-          onEndReached={() => {
-            if (isLoadingUserPosts) {
-              return;
-            }
-            setIsLoadingUserPosts(true);
-            const contentToAppend = pagination(
-              userPosts,
-              userPostsCurrentPage + 1,
-              userPostsPageSize,
-            );
-            if (contentToAppend.length > 0) {
-              setUserPostsCurrentPage(userPostsCurrentPage + 1);
-              setUserPostsRenderedData(prev => [...prev, ...contentToAppend]);
-            }
-          }}
-          data={userPostsRenderedData}
-          showsVerticalScrollIndicator={false}
-          renderItem={({item}) => (
-            <View style={globalStyle.userPostContainer}>
-              <UserPost
-                firstName={item.firstName}
-                lastName={item.lastName}
-                image={item.image}
-                likes={item.likes}
-                comments={item.comments}
-                bookmarks={item.bookmarks}
-                profileImage={item.profileImage}
-                location={item.location}
-              />
-            </View>
-          )}
-        />
-      </View>
-    </SafeAreaView>
+            )}
+          />
+        </View>
+      </SafeAreaView>
+    </NavigationContainer>
   );
 };
 
