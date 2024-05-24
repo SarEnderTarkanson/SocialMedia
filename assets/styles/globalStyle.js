@@ -4,6 +4,9 @@ const globalStyle = StyleSheet.create({
   backgroundWhite: {
     backgroundColor: '#ffffff',
   },
+  flex: {
+    flex: 1
+  }
 });
 
 export default globalStyle;
